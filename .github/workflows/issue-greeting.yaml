@@ -19,7 +19,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'Hi 👋 ! Thanks for reporting. We will take a look at your issue in a bit.'
+              body: 'Hi! Thanks for reporting. We will take a look at your issue in a bit.'
             })
 
       - name: Label issue
@@ -31,5 +31,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: ['Triage']
+              labels: ['Triage', 'help wanted']
             })
