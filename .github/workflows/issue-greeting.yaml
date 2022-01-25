@@ -1,0 +1,35 @@
+name: Issue greeting
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  issue_greeting:
+    name: Issue greeting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Issue greeting
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Hi! Thanks for reporting. We will take a look at your issue in a bit.'
+            })
+
+      - name: Label issue
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['Triage', 'help wanted']
+            })
